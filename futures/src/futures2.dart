@@ -3,8 +3,11 @@ import 'dart:async';
 
 void printDailyNewsDigest() {
   File file = new File("dailyNewsDigest.txt");
+  // read the file asynchronously, the execution will return inmediately
+  // and the file will be read later
   Future future = file.readAsString();
   future.then((content) {
+    // once the file is read, this callback is called with its content
     print(content);
   });
 }

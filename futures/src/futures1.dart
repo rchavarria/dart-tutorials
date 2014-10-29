@@ -2,6 +2,9 @@ import 'dart:io';
 
 void printDailyNewsDigest() {
   File file = new File("dailyNewsDigest.txt");
+  // read the file synchronously, without Futures
+  // it can take really long, and the single thread will freeze until 
+  // the file is completely read and printed
   print(file.readAsStringSync());
 }
 
