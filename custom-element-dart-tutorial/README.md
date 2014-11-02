@@ -38,6 +38,15 @@ Después, ejecutar el comando `pub get`. `pub` es una herramienta que viene con 
 SDK de Dart. Dart Editor también puede ejecutar este comando para instalar todas
 las dependencias del proyecto.
 
+Para inicializar Polymer, modificar `web/index.html` y añadir esta línea al final
+del mismo:
+
+``` html
+...
+<script type="application/dart">export "package:polymer/init.dart";</script>
+...
+```
+
 ## Incluir Polymer en la aplicación
 
 Estos son los ficheros a modificar para usar Polymer en la creación del
@@ -121,11 +130,93 @@ constructor *nombrado* que llame a `super.created()`.
 
 ## Enlazando datos entre Dart y el HTML
 
+En la parte visual (HTML) se pueden usar las llaves dobles `{{...}}` para utilizar una
+variable anotada como `@observable` en la parte de comportamiento (Dart). Por ejemplo,
+para usar una `String` que al modificarla en Dart se actualice la vista HTML, los
+ficheros `web/tute_stopwatch.html` y `web/tute_stopwatch.dart` quedarían:
+
+``` html
+<polymer-element name="tute-stopwatch">
+  <template>
+    <div> {{counter}} </div>
+  </template>
+  ...
+</polymer-element>
+```
+
+``` 
+@CustomTag('tute-stopwatch')
+class TuteStopwatch extends PolymerElement {
+    ...
+    @observable String counter;
+
+    void aMethod() {
+        counter = '14:59';
+    }
+}
+```
+
+Para hacer un doble enlace, de Dart a HTML y viceversa, se puede consultar en enlace
+[Two-way data binding using Polymer].
+
 ## Creando manejadores de eventos
+
+De la misma forma que se puede enlazar variables, se pueden enlazar manejadores de
+eventos que gestionen las interacciones del usuario. Por ejemplo, para responder
+ante un click del usuario, en HTML:
+
+``` html
+<button on-click="{{start}}">Start</button>
+```
+
+Mientras que en Dart:
+
+``` 
+@CustomTag('tute-stopwatch')
+class TuteStopwatch extends PolymerElement {
+    ...
+    void start(Event evt, var detail, Node target) {
+        ...
+    }
+}
+```
+
+Donde:
+
+- `evt`: contiene información sobre el evento
+- `detail`: puede proveer información adicional sobre el evento
+- `target`: el nodo HTML que lanzó el evento
+
+Para más información, como los manejadores de eventos disponibles y más, consultar
+[Declarative event mapping].
 
 ## Desplegando la aplicación
 
+Antes de desplegar, es necesario el uso de *transformadores* de Polymer para
+completar el proceso. Para ello, modificar `pubspec.yaml` añadiendo las siguientes
+líneas:
+
+```
+...
+dependencies:
+  polymer: ...
+transformers:
+- polymer:
+    entry_points: web/index.html
+```
+
+Definiendo `entry_points` indicamos a Polymer qué ficheros HTML queremos que transforme.
+
+Para probar el Web Component desarrollado podemos seleccionar *Ejecutar como JavaScript*
+sobre el fichero `web/index.html` desde Dart Editor.
+
+O también, tenemos el comando `pub serve` en línea de comandos. Este comando nos indicará
+una dirección URL donde poder probar la aplicación.
+
+El comando `pub build` genera ficheros que pueden ser desplegados en un servidor
+aparte y que hará posible ejecutar la aplicación en cualquier navegador moderno.
 
 [Cómo crear un Web Component con Dart y Polymer]: https://www.dartlang.org/docs/tutorials/polymer-intro/
-
+[Two-way data binding using Polymer]: https://www.dartlang.org/docs/tutorials/forms/#binding-data
+[Declarative event mapping]: http://www.polymer-project.org/polymer.html#declarative-event-mapping
 
