@@ -4,7 +4,9 @@ void main() {
     // singleStream();
     // streamProperties();
     // broadcast();
-    subsetsOfStreamData();
+    // subsetsOfStreamData();
+    // transformingStream();
+    validatingStream();
 }
 
 singleStream() {
@@ -74,4 +76,40 @@ subsetsOfStreamData() {
       .skipWhile((value) => value < 3) 
       .listen((value) => print("skipWhile: $value")); 
 }
+
+transformingStream() {
+  var data = [1,2,3,4,5];
+  var stream = new Stream.fromIterable(data);
+  
+  // define a stream transformer
+  var transformer = new StreamTransformer.fromHandlers(handleData: (value, sink) {
+    // create two new values from the original value
+    sink.add("Message: $value");
+    sink.add("Body: $value");
+  });
+    
+  // transform the stream and listen to its output
+  stream.transform(transformer).listen((value) => print("listen: $value"));
+}
+
+validatingStream() {
+  var data = [1,2,3,4,5];
+  var stream = new Stream.fromIterable(data);
+  var broadcastStream = stream.asBroadcastStream(); 
+  
+  broadcastStream
+      .any((value) => value < 3)
+      .then((result) => print("Any less than 3?: $result")); // true
+  
+  broadcastStream
+      .every((value) => value < 5)
+      .then((result) => print("All less than 5?: $result")); // false
+  
+  broadcastStream
+      .contains(4)
+      .then((result) => print("Contains 4?: $result")); // true
+}
+
+
+
 

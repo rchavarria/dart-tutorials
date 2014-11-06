@@ -113,3 +113,61 @@ broadcastStream
     .listen((value) => print("skipWhile: $value"));
 ```
 
+## Transformando streams
+
+El método `Stream.transform()` admite un parámetro de tipo `StreamTransformer`.
+Es posible crear uno con el método `fromHandlers()`, el cual admite un
+método como parámetro. Este método se llamará con 2 parámetros: cada uno de
+los valores del stream original, y un `StreamSink` al cual podremos añadir
+el valor transformado. La salida de `transform()` es un nuevo stream cuyos
+valores han sido transformados por el `StreamTransformer`.
+
+```
+var transformer = new StreamTransformer.fromHandlers(handleData: (value, sink) {
+  // create two new values from the original value
+  sink.add("Message: $value");
+  sink.add("Body: $value");
+});
+    
+// transform the stream and listen to its output
+stream.transform(transformer).listen((value) => print("listen: $value"));
+```
+
+Un ejemplo de la vida real podría ser la lectura de un fichero o de una
+petición HTTP, transformando los datos recibidos a `String` con el decodificador
+`UTF8.decoder()` del paquete `dart:convert`.
+
+```
+File file = new File("some_file.txt");
+file.openRead()
+    .transform(UTF8.decoder) // use a UTF8.decoder
+    .listen((String data) => print(data));
+```
+
+## Validando los valores de un stream
+
+Otros métodos útiles podrían ser `any()`, `every()` y `contains()`, los cuales
+devuelven todos `Future<boolean>`, es decir, un Future que se completa con un
+valor de `true` o `false`. 
+
+Estos métodos servirían para realizar ciertas comprobaciones sobre los datos
+recibidos por el stream. Siguiendo con el ejemplo que crea un stream a partir
+de un array con los valores del 1 al 5:
+
+```
+broadcastStream
+    .any((value) => value < 5)
+    .then((result) => print("Any less than 5?: $result")); // true
+  
+broadcastStream
+    .every((value) => value < 5)
+    .then((result) => print("All less than 5?: $result")); // false
+  
+broadcastStream
+    .contains(4)
+    .then((result) => print("Contains 4?: $result")); // true
+```
+
+
+
+
