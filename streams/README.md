@@ -51,3 +51,17 @@ streamProperties() {
 }
 ```
 
+También se pueden tener varios listeners, pero para eso hay que convertir el stream
+en un stream de broadcast con `asBroadcastStream()`. Podremos comprobar de qué tipo
+es un stream con la propiedad `isBroadcast`.
+
+```
+var data = [1,2,3,4,5];
+var stream = new Stream.fromIterable(data);
+var broadcastStream = stream.asBroadcastStream();
+
+broadcastStream.listen((value) => print("stream.listen: $value")); 
+broadcastStream.first.then((value) => print("stream.first: $value"));
+//...
+```
+

@@ -2,7 +2,8 @@ import 'dart:async';
 
 void main() {
     // singleStream();
-    streamProperties();
+    // streamProperties();
+    broadcast();
 }
 
 singleStream() {
@@ -35,4 +36,15 @@ streamProperties() {
   stream.length.then((value) => print("stream.length: $value"));
 }
 
+broadcast() {
+  var data = [1,2,3,4,5];
+  var stream = new Stream.fromIterable(data);
+  var broadcastStream = stream.asBroadcastStream();
+
+  broadcastStream.listen((value) => print("broadcastStream.listen: $value")); 
+  broadcastStream.first.then((value) => print("broadcastStream.first: $value")); 
+  broadcastStream.last.then((value) => print("broadcastStream.last: $value")); 
+  broadcastStream.isEmpty.then((value) => print("broadcastStream.isEmpty: $value")); 
+  broadcastStream.length.then((value) => print("broadcastStream.length: $value")); 
+}
 
