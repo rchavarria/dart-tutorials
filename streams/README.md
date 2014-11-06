@@ -168,6 +168,46 @@ broadcastStream
     .then((result) => print("Contains 4?: $result")); // true
 ```
 
+## Gestión de errores con StreamSubscription
+
+Existen dos alternativas para la gestión de errores en los streams. Usando el
+objeto StreamSubscription que retorna `listen()` o pasando los manejadores de
+eventos al propio método `listen()`.
+
+Usando StreamSubscription devuelto por `listen()`:
+
+```
+var subscription = stream.listen(null);
+subscription.onData((value) => print("listen: $value"));
+subscription.onError((err) => print("error: $err"));
+subscription.onDone(() => print("done"));
+```
+
+Pasandolos como parámetros:
+
+```
+var subscription = stream.listen(
+    (value) => print("listen: $value"),
+    onError: (err) => print("error: $err"),
+    onDone: () => print("done")
+    );
+```
+
+## Eliminando la suscripción a un stream
+
+Con el método anterior de obtener un objeto `StreamSubscription`, podemos
+utilizar dicha referencia para cancelar la suscripción con el método `cancel()`.
+
+```
+var subscription = stream.listen(null);
+subscription.onData((value) {
+  print("listen: $value");
+  if (value == 2) subscription.cancel();
+});
+```
+
+
+
 
 
 

@@ -6,8 +6,12 @@ void main() {
     // broadcast();
     // subsetsOfStreamData();
     // transformingStream();
-    validatingStream();
+    // validatingStream();
+    // streamSubscription_handlersOnSubscription();
+    // streamSubscription_handlerFunctionArgs();
+    unsubscribing();
 }
+
 
 singleStream() {
   var data = [1,2,3,4,5];
@@ -110,6 +114,41 @@ validatingStream() {
       .then((result) => print("Contains 4?: $result")); // true
 }
 
+streamSubscription_handlersOnSubscription() {
+  var data = [1,2,3,4,5];
+  var stream = new Stream.fromIterable(data);
+  
+  // BEGIN(subscription_handler_methods)
+  // setup the handlers through the subscription's handler methods
+  var subscription = stream.listen(null);
+  subscription.onData((value) => print("listen: $value"));
+  subscription.onError((err) => print("error: $err"));
+  subscription.onDone(() => print("done"));
+  // END(subscription_handler_methods)
+}
 
+streamSubscription_handlerFunctionArgs() {
+  var data = [1,2,3,4,5];
+  var stream = new Stream.fromIterable(data);
+  
+  // BEGIN(arguments_to_listen)
+  // setup the handlers as arguments to the listen() function
+  var subscription = stream.listen(
+      (value) => print("listen: $value"),
+      onError: (err) => print("error: $err"),
+      onDone: () => print("done"));
+  // END(arguments_to_listen)
+}
+
+unsubscribing() {
+  var data = [1,2,3,4,5];
+  var stream = new Stream.fromIterable(data);
+  
+  var subscription = stream.listen(null);
+  subscription.onData((value) {
+    print("listen: $value");
+    if (value == 2) subscription.cancel(); // cancel the subscription
+  });
+}
 
 
