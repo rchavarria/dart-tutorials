@@ -65,3 +65,51 @@ broadcastStream.first.then((value) => print("stream.first: $value"));
 //...
 ```
 
+## Subconjuntos de datos de un stream
+
+Los Streams tienen algunos métodos de utilidad que permiten seleccionar un subconjunto
+de los datos que vendrán en el stream. Cada uno de estos métodos devuelve un
+stream al que podemos registrar un listener. Para una lista completa de estos métodos
+se puede consultar la documentación oficial: 
+[API Streams](http://api.dartlang.org/dart_async/Stream.html).
+
+`where`: selecciona aquellos datos que cumplen una condición:
+
+```
+broadcastStream
+    .where((value) => value % 2 == 0) 
+    .listen((value) => print("where: $value"));
+```
+
+`take`: toma solo los `n` primeros elementos:
+
+```
+broadcastStream
+    .take(3) 
+    .listen((value) => print("take: $value"));
+```
+
+`skip`: se salta los `n` primeros elementos:
+
+```
+broadcastStream
+    .skip(3)
+    .listen((value) => print("skip: $value"));
+```
+
+`takeWhile`: va tomando datos mientras la condición sea verdadera:
+
+```
+broadcastStream
+    .takeWhile((value) => value < 3) 
+    .listen((value) => print("takeWhile: $value"));
+```
+
+`skipWhile`: va saltando datos mientras la condición sea verdadera:
+
+```
+broadcastStream
+    .skipWhile((value) => value < 3)
+    .listen((value) => print("skipWhile: $value"));
+```
+
