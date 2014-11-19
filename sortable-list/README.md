@@ -24,7 +24,19 @@ en el tutorial sobre [Cómo crear un web component], en este fichero importaremo
 definición de nuestros web components, incluiremos la librería Polymer y la
 inicializaremos.
 
-
+``` html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="sortable_app.html">
+  <title>Sortable list</title>
+</head>
+<body>
+  <sortable-app></sortable-app>
+  <script type="application/dart">export 'package:polymer/init.dart';</script>
+</body>
+</html>
+```
 
 
 [Cómo crear un web component]: ../custom-element-dart-tutorial
