@@ -1,6 +1,10 @@
 name:  sortable_list
 description: A Dart/Polymer application that allows you to sort a list
-
+transformers:
+- polymer:
+    entry_points:
+    - web/index.html
+    - web/sortable_app.html
 dependencies:
     polymer: ">=0.15.0 <0.16.0"
 dev_dependencies:
