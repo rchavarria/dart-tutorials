@@ -112,7 +112,30 @@ Ahora, simplemente con el comando `pub serve` podremos visitar [http://localhost
 para poder probar nuestra applicación. Si el puerto 80 está ocupado, se puede
 indicar uno con `pub serve --port <puerto>`.
 
+## Siguiente Web Component
 
+El siguiente Web Component a implementar se llamará `sortable-list` y será quien
+realice la ordenación propiamente dicha.
+
+Pero comencemos poco a poco. Constará también de dos ficheros: uno para la parte
+visual y otro para el comportamiento.
+
+
+
+
+
+TODO:
+- sortable_list.html tiene la plantillla html jusitta para mostrar una lista con
+<ul> y <li>
+- soratable_list.html incluye sortable_list.dart
+- sortable_app.html incluye sortable_list.html y se muestran todos los html, los
+del index.html, los del sortable-app y los de sortable-list
+- sortable_list.dart tiene varialbes @observable que nos permiten crear una lista
+de cosas "dinámicamente"
+- soratble_list.dart tiene una varialbe @published que es como un parámetro que
+le puede pasar sortable_app.html
+- sortable_list.html añade un botón que hace que la lista se modifique
+- ...
 
 
 
