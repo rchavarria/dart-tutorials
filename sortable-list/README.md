@@ -55,6 +55,22 @@ PONER BONICO
     - una variable con las tareas a ordenar
 - en pubspec.yaml, añadir transformers para index.html y sortable_app.html
 - servir con `pub serve --port 8082` y a probar
+crear sortable_app.html
+    - import polymer.html
+    - <polymer-element>
+    - <template>
+        - <style>
+        - algo de html
+    - script
+        - el fichero dart
+- crear el script dart
+    - import polymer
+    - @CustomTag
+    - named constructor
+    - un @observable por ahí
+    - una variable con las tareas a ordenar
+- en pubspec.yaml, añadir transformers para index.html y sortable_app.html
+- servir con `pub serve --port 8082` y a probar
 
 
 [Cómo crear un web component]: ../custom-element-dart-tutorial
