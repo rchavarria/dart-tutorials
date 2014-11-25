@@ -151,12 +151,26 @@ class SortableList extends PolymerElement {
 }
 ```
 
+Modificamos `sortable_app.html` para que incluya la definición de `sortable-list`
+y usamos el Web Component definido:
+
+``` html
+<link rel="import" href="sortable_list.html">
+<polymer-element name="sortable-app">
+  <template>
+    ...
+    <sortable-list></sortable-list>
+    ...
+  </template>
+  ...
+</polymer-element>
+```
 
 TODO:
-- sortable_list.html tiene la plantillla html jusitta para mostrar una lista con
++ sortable_list.html tiene la plantillla html jusitta para mostrar una lista con
 <ul> y <li>
-- soratable_list.html incluye sortable_list.dart
-- sortable_app.html incluye sortable_list.html y se muestran todos los html, los
++ soratable_list.html incluye sortable_list.dart
++ sortable_app.html incluye sortable_list.html y se muestran todos los html, los
 del index.html, los del sortable-app y los de sortable-list
 - sortable_list.dart tiene varialbes @observable que nos permiten crear una lista
 de cosas "dinámicamente"
