@@ -5,6 +5,7 @@ transformers:
     entry_points:
     - web/index.html
     - web/sortable_app.html
+    - web/sortable_list.html
 dependencies:
     polymer: ">=0.15.0 <0.16.0"
 dev_dependencies:
