@@ -120,8 +120,36 @@ realice la ordenación propiamente dicha.
 Pero comencemos poco a poco. Constará también de dos ficheros: uno para la parte
 visual y otro para el comportamiento.
 
+`sortable_list.html` es el fichero que contiene la definición gráfica de este nuevo
+Web Component. Por ahora, simplemente haremos que muestre una lista con las
+etiquetas `ul` y `li`.
 
+``` html
+<link rel="import" href="../../packages/polymer/polymer.html">
+<polymer-element name="sortable-list">
+  <template>
+    <ul>
+      <li>First li</li>
+    </ul>
+  </template>
 
+  <script type="application/dart" src="sortable_list.dart"></script>
+</polymer-element>
+```
+
+Por su parte, `sortable_list.dart` define el comportamiento de este Web
+Component. Por ahora será muy sencillo, no añadirá nada. Lo haremos más adelante.
+
+```
+import 'package:polymer/polymer.dart';
+
+@CustomTag('sortable-list')
+class SortableList extends PolymerElement {
+
+  SortableList .created() : super.created();
+
+}
+```
 
 
 TODO:
