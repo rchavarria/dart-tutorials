@@ -166,13 +166,38 @@ y usamos el Web Component definido:
 </polymer-element>
 ```
 
+## Mostrando una lista de elementos variables
+
+Vamos a necesitar mostrar una lista de elementos. Para ello en `sortable_list.dart`
+añadiremos una variable donde almacenar la lista, y la anotaremos con `@observable`.
+De esta forma, la lista será *visible* desde HTML.
+
+El código Dart quedaría más o menos así:
+
+```
+...
+@observable List<String> taskList = ['one', 'two', 'three'];
+...
+```
+
+Y el código HTML, usa `<template repeat="">` de Polymer para crear una lista
+no numerada por cada uno de los elementos de la variable de Dart:
+
+``` html
+<template repeat="{{task in taskList}}">
+  <li>{{task}}</li>
+</template>
+```
+
+
+
 TODO:
 + sortable_list.html tiene la plantillla html jusitta para mostrar una lista con
 <ul> y <li>
 + soratable_list.html incluye sortable_list.dart
 + sortable_app.html incluye sortable_list.html y se muestran todos los html, los
 del index.html, los del sortable-app y los de sortable-list
-- sortable_list.dart tiene varialbes @observable que nos permiten crear una lista
++ sortable_list.dart tiene varialbes @observable que nos permiten crear una lista
 de cosas "dinámicamente"
 - soratble_list.dart tiene una varialbe @published que es como un parámetro que
 le puede pasar sortable_app.html
