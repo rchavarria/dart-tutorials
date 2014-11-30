@@ -5,6 +5,7 @@ class SortableList extends PolymerElement {
 
   @published List<String> externalData = [];
   final List<String> taskList = toObservable([]);
+  boolean defaultSort = true;
 
   SortableList.created() : super.created();
 
@@ -12,4 +13,15 @@ class SortableList extends PolymerElement {
     super.attached();
     taskList.addAll(externalData);
   }
+
+  sortTaskList() {
+    if (defaultSort) {
+      taskList.sort();
+    } else {
+      taskList.sort((a, b) => b.compareTo(a));
+    }
+
+    defaultSort = !defaultSort;
+  }
+
 }

@@ -2,6 +2,7 @@
 <link rel="import" href="../../packages/polymer/polymer.html">
 <polymer-element name="sortable-list">
   <template>
+    <button on-click="{{sortTaskList}}">Sort task list</button>
     <ul>
       <template repeat="{{task in taskList}}">
         <li>{{task}}</li>

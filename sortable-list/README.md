@@ -221,27 +221,26 @@ variable `taskSortableList` en el fichero `sortable_app.dart`:
 List<String> taskSortableList = const [...]
 ```
 
-TODO:
-+ sortable_list.html tiene la plantillla html jusitta para mostrar una lista con
-<ul> y <li>
-+ soratable_list.html incluye sortable_list.dart
-+ sortable_app.html incluye sortable_list.html y se muestran todos los html, los
-del index.html, los del sortable-app y los de sortable-list
-+ sortable_list.dart tiene varialbes @observable que nos permiten crear una lista
-de cosas "dinámicamente"
-- soratble_list.dart tiene una varialbe @published que es como un parámetro que
-le puede pasar sortable_app.html
-- sortable_list.html añade un botón que hace que la lista se modifique
-- ...
+## Ordenar la lista pulsando en un botón
 
+Por fin, llegamos a la parte final del tutorial: ordenar la lista. Para lanzar
+la ordenación, crearemos un botón, y al pulsar sobre él, la lista será
+ordenada.
 
+Añadimos el botón en `sortable_list.html` estableciendo un manejador del evento
+de click que luego implementaremos:
 
+``` html
+<button on-click="{{sortTaskList}}">Sort task list</button>
+```
 
+Y la implementación de `sortTaskList` en Dart:
 
-
-
+```
+sortTaskList() {
+  taskList.sort();
+}
+```
 
 [Cómo crear un web component]: ../custom-element-dart-tutorial
-
-
 
