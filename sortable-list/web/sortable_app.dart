@@ -2,13 +2,11 @@ import 'package:polymer/polymer.dart';
 
 @CustomTag('sortable-app')
 class SortableApp extends PolymerElement {
-  @observable bool applyAuthorStyles = true;
-
   List<String> taskSortableList = const [
     'Import polymer dart library',
     'Annotate with @CustomeTag',
-    'extends from PolymerElement',
-    'observe some variables',
+    'Extends from PolymerElement',
+    'Observe some variables',
     'Define a named constructor .created()'
     ];
 

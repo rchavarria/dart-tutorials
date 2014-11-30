@@ -3,6 +3,7 @@
 <polymer-element name="sortable-list">
   <template>
     <button on-click="{{sortTaskList}}">Sort task list</button>
+    <h3>Task list:</h3>
     <ul>
       <template repeat="{{task in taskList}}">
         <li>{{task}}</li>
