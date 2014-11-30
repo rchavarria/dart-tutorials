@@ -189,7 +189,37 @@ no numerada por cada uno de los elementos de la variable de Dart:
 </template>
 ```
 
+## Parametrizando los valores de la lista
 
+El código anterior está muy bien, pero estaría mejor tener una lisa de tareas
+que fuera configurable, o al menos, que una entidad exterior (como otro
+Web Component por ejemplo) pudiera indicar dicha lista.
+
+Para conseguirlo, añadiremos una propiedad `@published` a `sortable_list.dart`.
+Desde `sortable_app.dart` y `sortable_app.html` le pasaremos la lista de
+elementos deseados.
+
+`sortable_list.dart`:
+
+```
+@published List<String> externalData = [];
+final List<String> taskList = toObservable([]);
+```
+
+Modificamos la línea de `sortable_app.html` donde se crea el Web Component
+`sortable-list`:
+
+``` html
+<sortable-list externalData="{{taskSortableList}}"></sortable-list>
+```
+
+`externalData` es la variable pública de `sortable-list` al cual establecemos
+el valor adecuado desde `sortable-app`. El valor elegido es el valor de la 
+variable `taskSortableList` en el fichero `sortable_app.dart`:
+
+```
+List<String> taskSortableList = const [...]
+```
 
 TODO:
 + sortable_list.html tiene la plantillla html jusitta para mostrar una lista con

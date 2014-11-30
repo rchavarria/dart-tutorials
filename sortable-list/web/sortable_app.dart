@@ -4,7 +4,7 @@ import 'package:polymer/polymer.dart';
 class SortableApp extends PolymerElement {
   @observable bool applyAuthorStyles = true;
 
-  List<String> tasks = const [
+  List<String> taskSortableList = const [
     'Import polymer dart library',
     'Annotate with @CustomeTag',
     'extends from PolymerElement',
