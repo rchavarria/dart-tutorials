@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<link rel="import" href="packages/polymer/polymer.html">
+<polymer-element name="book-store-form" extends="form">
+    <template>
+        <style>
+        </style>
+
+        <input type="text" id="title"><br>
+        <input type="text" id="author"><br>
+        <input type="submit" value="Enviar" on-click="{{submitForm}}">
+    </template>
+
+    <script type="application/dart" src="book_store_form.dart"></script>
+</polymer-element>
