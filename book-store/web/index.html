@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Librería</title>
+
+        <!-- importar web component -->
+        <link rel="import" href="book-store.html">
     </head>
     <body>
         <form is="book-store-form" id="book-store-form-id">
@@ -8,5 +12,7 @@
             <input type="text" id="author"><br>
             <input type="submit" value="Enviar" on-click="{{submitForm}}">
         </form>
+
+        <script type="application/dart">export 'package:polymer/init.dart';</script>
     </body>
 </html>
