@@ -44,6 +44,38 @@ dart bin/bookstore-server.dart
 
 ## Enviando los datos del formulario
 
+El formulario va a enviar los datos al servidor de forma programática, es decir,
+vamos a programar qué datos va a enviar y cómo lo va a hacer (método GET o POST
+de HTTP). Para ello, el botón *submit* del formulario tendrá un manejador
+de evento que le proporcionaremos y desde ahí controlaremos la llamada al
+servidor. Este manejador de evento será un método Dart de un Web Component
+asociado al formulario.
+
+El código del formulario es muy sencillo, podría ser algo así:
+
+``` html
+```
+
+De este código cabe destacar el atributo `is` de la etiqueta `form`. Este atributo
+indica el Web Component que va a proporcionar comportamiento al formulario.
+
+Para definir ese Web Component, crearemos una clase Dart con el siguiente
+código:
+
+```
+```
+
+El siguiente código corresponde al manejador del evento *click* del botón de
+*submit* del formulario. En él, anulamos el comportamiento por defecto del
+evento, ya que si no el formulario se enviaría sin nuestro control. También
+creamos un objeto `HttpRequest` para enviar los datos al servidor, abrimos
+una conexión a través del método POST de HTTP y enviamos los datos en formato
+JSON. Más adelante ya veremos cómo podemos escuchar la respuesta del servidor.
+
+```
+```
+
+
  
 
 
