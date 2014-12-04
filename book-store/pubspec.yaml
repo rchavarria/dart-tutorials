@@ -1,0 +1,8 @@
+name: bookstore
+description: Una aplicación en Dart y Polymer para simular una librería 
+dependencies:
+    polymer: '>=0.14.0 <0.15.0'
+transformers:
+- polymer:
+    entry_points: web/index.html
+
