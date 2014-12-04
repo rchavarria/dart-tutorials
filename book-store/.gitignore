@@ -1,0 +1,4 @@
+.pub/
+packages/
+web/packages
+pubspec.lock
