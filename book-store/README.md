@@ -54,15 +54,29 @@ asociado al formulario.
 El código del formulario es muy sencillo, podría ser algo así:
 
 ``` html
+<form is="book-store-form"></form>
 ```
 
 De este código cabe destacar el atributo `is` de la etiqueta `form`. Este atributo
-indica el Web Component que va a proporcionar comportamiento al formulario.
+indica el Web Component que va a proporcionar comportamiento al formulario. Será
+el propio Web Component quien defina los campos del formulario, ya que va a ser
+él quien los gestione.
 
 Para definir ese Web Component, crearemos una clase Dart con el siguiente
 código:
 
 ```
+import ...
+
+@CustomTag('book-store-form')
+class BookStoreForm extends FormElement with Polymer, Observable {
+    // ...
+
+    BookStoreForm.created() : super.created() { 
+        polymerCreated();
+    }
+}
+
 ```
 
 El siguiente código corresponde al manejador del evento *click* del botón de
@@ -73,7 +87,19 @@ una conexión a través del método POST de HTTP y enviamos los datos en formato
 JSON. Más adelante ya veremos cómo podemos escuchar la respuesta del servidor.
 
 ```
+void submitForm(Event e, var detail, Node target) {
+    e.preventDefault();
+       
+    HttpRequest request = new HttpRequest();
+
+    // POST the data to the server.
+    var url = 'http://127.0.0.1:4040';
+    request.open('POST', url);
+    request.send(buildDataToBeSent());
+}
 ```
+
+## Escuchando datos del servidor
 
 
  
@@ -82,9 +108,10 @@ JSON. Más adelante ya veremos cómo podemos escuchar la respuesta del servidor.
 
 
 TASKS:
-- crear el html que contenga el formulario
-- crear el web component que va a ser el formulario (va a extender el elemento FORM de html)
-- crear campos en el formulario para enviar titulo y autor al servidor
-- crear en .dart el método que va a enviar el formulario
++ crear el html que contenga el formulario
++ crear el web component que va a ser el formulario (va a extender el elemento FORM de html)
++ crear campos en el formulario para enviar titulo y autor al servidor
++ crear en .dart el método que va a enviar el formulario
+- escuchar la respuesta del servidor
 - comenzar con el servidor
 
