@@ -101,6 +101,43 @@ void submitForm(Event e, var detail, Node target) {
 
 ## Escuchando datos del servidor
 
+Lo primero que debemos hacer para recibir datos del servidor es escuchar cambios
+en `ready state`. Modificamos el método `submitForm` visto anteriormente:
+
+```
+//...
+request = new HttpRequest();
+request.onReadyStateChange.listen(onDataReceived);
+
+var url = 'http://127.0.0.1:4040';
+//...
+```
+
+Donde `onDataReceived` es el nombre del método que va a escuchar esos cambios.
+La implementación de este método es la que sigue:
+
+```
+void onDataReceived(_) {
+    if (request.readyState != HttpRequest.DONE) {
+        return;
+    }
+
+    if (request.status != 200) {
+        errorMessage = 'Something bad happened';
+        return;
+    }
+
+    serverResponse = request.responseText;
+}
+```
+
+En el método se comprueba si la request ha terminado. Si todavía no ha terminado
+no hacemos nada. Luego, commprobamos que el código devuelto por el servidor es
+`200` (todo correcto). Si no es así, establecemos un valor a una variable
+`@observable` para que refleje el error en la vista (HTML). 
+
+Finalmente, si todo es correcto, mostramos la respuesta proporcionada por el
+servidor a través de otra propiedad `@observable`.
 
  
 
