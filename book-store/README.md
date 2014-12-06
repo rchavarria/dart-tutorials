@@ -149,6 +149,6 @@ TASKS:
 + crear el web component que va a ser el formulario (va a extender el elemento FORM de html)
 + crear campos en el formulario para enviar titulo y autor al servidor
 + crear en .dart el método que va a enviar el formulario
-- escuchar la respuesta del servidor
++ escuchar la respuesta del servidor
 - comenzar con el servidor
 
