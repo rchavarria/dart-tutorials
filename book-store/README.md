@@ -151,4 +151,8 @@ TASKS:
 + crear en .dart el método que va a enviar el formulario
 + escuchar la respuesta del servidor
 - comenzar con el servidor
+- crear el servidor y escuchar en un puerto
+- manejar peticiones OPTIONS
+- manejar cabeceras CORS
+- manejar peticiones POST
 
