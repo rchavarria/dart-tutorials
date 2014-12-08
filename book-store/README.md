@@ -139,7 +139,49 @@ no hacemos nada. Luego, commprobamos que el código devuelto por el servidor es
 Finalmente, si todo es correcto, mostramos la respuesta proporcionada por el
 servidor a través de otra propiedad `@observable`.
 
- 
+## Creando el servidor
+
+Crear un servidor en Dart es extremadamente sencillo, simplemente hay que
+utilizar la clase `HttpServer`:
+
+```
+HttpServer.bind('127.0.0.1', 80).then(successfullyBound, onError: printError);
+``` 
+
+Donde `successfullyBound` es un método de callback que será llamado si se
+arrancó correctamente el servidor HTTP en la dirección y puerto indicados.
+
+Por ahora, no vamos a implementar respuestas para ninguna petición, simplemente
+crearemos un manejador de peticiones por defecto:
+
+```
+void successfullyBound(server) {
+    server.listen((HttpRequest request) {
+        switch (request.method) {
+            default:
+                defaultHandler(request);
+        }
+    },
+    onError: printError);
+    
+    print('Listening for HTTP requests on http://127.0.0.1:80');
+}
+
+void defaultHandler(HttpRequest req) {
+  HttpResponse res = req.response;
+  res.statusCode = HttpStatus.NOT_FOUND;
+  res.write('Not found: ${req.method}, ${req.uri.path}');
+  res.close();
+}
+```
+
+
+
+
+
+
+
+
 
 
 
@@ -150,8 +192,8 @@ TASKS:
 + crear campos en el formulario para enviar titulo y autor al servidor
 + crear en .dart el método que va a enviar el formulario
 + escuchar la respuesta del servidor
-- comenzar con el servidor
-- crear el servidor y escuchar en un puerto
++ comenzar con el servidor
++ crear el servidor y escuchar en un puerto
 - manejar peticiones OPTIONS
 - manejar cabeceras CORS
 - manejar peticiones POST
