@@ -175,6 +175,35 @@ void defaultHandler(HttpRequest req) {
 }
 ```
 
+## Manejar peticiones POST
+
+Por el momento, solo atenderemos peticiones POST, para simplificar el código del
+tutorial. La respuesta a una petición POST será simplemente un pequeño texto y
+los datos que se envíen desde el formulario.
+
+Adicionalemente, se añadirán unas cabeceras [CORS] para permitir peticiones de
+distintos dominios (una petición desde la aplicación cliente esta en un
+dominio diferente al de la aplicación servidor en este tutorial).
+
+```
+void handlePost(HttpRequest req) {
+  HttpResponse res = req.response;
+  print('${req.method}: ${req.uri.path}');
+  
+  addCorsHeaders(res);
+  
+  req.listen((List<int> buffer) {
+    res.write('You said:');
+    res.write(new String.fromCharCodes(buffer));
+    res.close();
+  },
+  onError: printError);
+}
+```
+
+Se recomienda echar un vistazo al método `addCorsHeaders` para ver las cabeceras
+CORS que se añaden a la respuesta.
+
 
 
 
@@ -194,7 +223,7 @@ TASKS:
 + escuchar la respuesta del servidor
 + comenzar con el servidor
 + crear el servidor y escuchar en un puerto
++ manejar cabeceras CORS
++ manejar peticiones POST
 - manejar peticiones OPTIONS
-- manejar cabeceras CORS
-- manejar peticiones POST
 

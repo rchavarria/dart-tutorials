@@ -9,6 +9,8 @@ void main() {
 
 void successfullyBound(server) {
   server.listen((HttpRequest request) {
+    print('${req.method}: ${req.uri.path}');
+
     switch (request.method) {
       case 'POST': 
         handlePost(request);
@@ -25,13 +27,11 @@ void successfullyBound(server) {
 
 void handlePost(HttpRequest req) {
   HttpResponse res = req.response;
-  print('${req.method}: ${req.uri.path}');
   
   addCorsHeaders(res);
   
   req.listen((List<int> buffer) {
-    // return the data back to the client
-    res.write('Thanks for the data. This is what I heard you say: ');
+    res.write('You said: ');
     res.write(new String.fromCharCodes(buffer));
     res.close();
   },
@@ -47,7 +47,7 @@ void addCorsHeaders(HttpResponse res) {
 void handleOptions(HttpRequest req) {
   HttpResponse res = req.response;
   addCorsHeaders(res);
-  print('${req.method}: ${req.uri.path}');
+
   res.statusCode = HttpStatus.NO_CONTENT;
   res.close();
 }
@@ -55,6 +55,7 @@ void handleOptions(HttpRequest req) {
 void defaultHandler(HttpRequest req) {
   HttpResponse res = req.response;
   addCorsHeaders(res);
+
   res.statusCode = HttpStatus.NOT_FOUND;
   res.write('Not found: ${req.method}, ${req.uri.path}');
   res.close();
