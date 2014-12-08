@@ -9,7 +9,7 @@ void main() {
 
 void successfullyBound(server) {
   server.listen((HttpRequest request) {
-    print('${req.method}: ${req.uri.path}');
+    print('${request.method}: ${request.uri.path}');
 
     switch (request.method) {
       case 'POST': 
