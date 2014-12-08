@@ -240,5 +240,7 @@ TASKS:
 + crear el servidor y escuchar en un puerto
 + manejar cabeceras CORS
 + manejar peticiones POST
-- manejar peticiones OPTIONS
++ manejar peticiones OPTIONS
+- arreglar el cliente para que envíe de verdad los datos del formulario
+- 
 
