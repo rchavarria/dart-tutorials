@@ -204,7 +204,22 @@ void handlePost(HttpRequest req) {
 Se recomienda echar un vistazo al método `addCorsHeaders` para ver las cabeceras
 CORS que se añaden a la respuesta.
 
+## Manejando peticiones OPTIONS
 
+Cuando un cliente se está ejecutando desde un lugar diferente a la aplicación
+servidor, antes de enviar una petición POST, el cliente debe enviar una petición
+OPTIONS. 
+
+En la parte del cliente, no debemos hacer nada, ya que la clase `HttpRequest` se
+encarga de ello.
+
+En la parte del servidor, debemos manejar estas peticiones. La respuesta para este
+tipo de peticiones es sencilla: añadiremos las cabeceras CORS indicando que la
+petición es correcta, y devolveremos un código HTTP de que *no ha contenido*. El
+código Dart que maneja este tipo de peticiones se encuentra en el método
+`handleOptions` del fichero `bin/bookstore.dart`.
+
+Después, el cliente enviará por fin la petición POST.
 
 
 
