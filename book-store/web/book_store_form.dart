@@ -8,6 +8,8 @@ class BookStoreForm extends FormElement with Polymer, Observable {
     HttpRequest request;
     @observable String errorMessage = '';
     @observable String serverResponse = '';
+    @observable String title = '';
+    @observable String author = '';
 
     BookStoreForm.created() : super.created() { 
         polymerCreated();
@@ -30,6 +32,11 @@ class BookStoreForm extends FormElement with Polymer, Observable {
             return;
         }
 
+        if (request.status == 0) {
+            errorMessage = 'Oops. Is the server running?';
+            return;
+        }
+
         if (request.status != 200) {
             errorMessage = 'Something bad happened';
             return;
@@ -39,7 +46,7 @@ class BookStoreForm extends FormElement with Polymer, Observable {
     }
 
     String buildDataToBeSent() {
-        return JSON.encode({'foo': 'bar'});
+        return JSON.encode({ 'title': title, 'author': author });
     }
 }
 

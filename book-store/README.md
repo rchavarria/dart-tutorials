@@ -221,26 +221,3 @@ código Dart que maneja este tipo de peticiones se encuentra en el método
 
 Después, el cliente enviará por fin la petición POST.
 
-
-
-
-
-
-
-
-
-
-TASKS:
-+ crear el html que contenga el formulario
-+ crear el web component que va a ser el formulario (va a extender el elemento FORM de html)
-+ crear campos en el formulario para enviar titulo y autor al servidor
-+ crear en .dart el método que va a enviar el formulario
-+ escuchar la respuesta del servidor
-+ comenzar con el servidor
-+ crear el servidor y escuchar en un puerto
-+ manejar cabeceras CORS
-+ manejar peticiones POST
-+ manejar peticiones OPTIONS
-- arreglar el cliente para que envíe de verdad los datos del formulario
-- 
-
