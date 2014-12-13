@@ -12,8 +12,7 @@ Tutorials:
 send out a repeating series of data
 - [Sortable lists](./sortable-list): Create Web Components with Polymer and Dart to create and
 share libraries, components or functionalities
-- *in a near future*: [Concatenating files](https://github.com/dart-lang/sample-dcat): use streams
-to read files and process I/O
+- [Concatenating files](./concatenating-files): use streams to read files and process I/O
 - *in a near future*: [Searching files for content](https://github.com/dart-lang/sample-dgrep): a simple
 app that shows how to work with files and directoreis asynchronously
 - *in a near future*: [Search the web with HttpRequest and WebWorker](https://github.com/dart-lang/sample-dartiverse-search):
