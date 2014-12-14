@@ -92,6 +92,19 @@ FileSystemEntity.isDirectory(path).then((pathIsDirectory) {
 
 ## Ejecutar la aplicación
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 TODOs:
 - crear estructura de ficheros para poder hacer varias pruebas
 - implementar el código
