@@ -1,0 +1,15 @@
+# directories created by pub
+.pub
+build/
+packages
+
+# files created by dart2js
+*.dart.js
+*.dart.precompiled.js
+*.js_
+*.js.deps
+*.js.map
+*.sw?
+
+# 
+pubspec.lock
