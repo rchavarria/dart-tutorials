@@ -92,14 +92,21 @@ FileSystemEntity.isDirectory(path).then((pathIsDirectory) {
 
 ## Ejecutar la aplicación
 
+`dart bin/read.dart bin` da un error al leer de un directorio
+`dart bin/read.dart foobar` da un error a intentar leer un dichero que no existe
+`dart bin/read.dart README.md` muestra este fichero por consola
+
+
 TODOs:
 + investigar cómo crear un Future para poder encadenarlos.
     -> con el constructor Future.value() puedo devolver un Future que me dejará
         encadenar llamadas
 + investigar cómo provocar el fallo en un Future para saltar el flujo de ejecución
     -> con el constructor Future.error() puedo resolver un Future con error
-- crear estructura de ficheros para poder hacer varias pruebas
-- implementar el código
++ crear estructura de ficheros para poder hacer varias pruebas
++ implementar el código
+- manejar los errores en un catchError()
+- explicar mejor los tres casos de uso
 - 
 
 - [Dart]: http://dartlang.org
