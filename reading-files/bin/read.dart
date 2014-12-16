@@ -9,7 +9,6 @@ void main(List<String> arguments) {
     }
 
     String filePath = arguments[0];
-    print('You are gonna read the file ${filePath}');
     readFile(filePath);
 }
 
@@ -34,6 +33,12 @@ void readFile(String filePath) {
     })
     .then((filePath) {
         print('Finally, reading file ${filePath}');
+        file.openRead()
+            .transform(UTF8.decoder)
+            .transform(new LineSplitter())
+            .listen((line) {
+                print(line);
+            });
     });
 }
 
