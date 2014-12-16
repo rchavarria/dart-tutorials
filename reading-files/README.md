@@ -76,7 +76,7 @@ nos pase por parámetro o no.
 
 ```
 String path = 'path to some exisiting or not file';
-FileSystemEntity.exists(path).then((fileExists) {
+new File(path).exists().then((fileExists) {
     if (!fileExists) {
         print('Error: file ${path} does not exists');
     }

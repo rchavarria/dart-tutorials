@@ -32,7 +32,7 @@ void readFile(String filePath) {
             return new Future.value(filePath);
         })
         .then((_) {
-            print('Finally, reading file ${filePath}');
+            print('${filePath} contents:');
             file.openRead()                     // returns a Stream to listen to
                 .transform(UTF8.decoder)        // transforms int's to characters
                 .transform(new LineSplitter())  // split in lines
