@@ -92,20 +92,12 @@ FileSystemEntity.isDirectory(path).then((pathIsDirectory) {
 
 ## Ejecutar la aplicación
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 TODOs:
++ investigar cómo crear un Future para poder encadenarlos.
+    -> con el constructor Future.value() puedo devolver un Future que me dejará
+        encadenar llamadas
++ investigar cómo provocar el fallo en un Future para saltar el flujo de ejecución
+    -> con el constructor Future.error() puedo resolver un Future con error
 - crear estructura de ficheros para poder hacer varias pruebas
 - implementar el código
 - 

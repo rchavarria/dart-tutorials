@@ -7,7 +7,7 @@ operaciones asíncronas permiten al programador crear operaciones sin bloquear
 la aplicación entera. Dart usa la clase `Future` para realizar estas
 operaciones asíncronas.
 
-En el [tutorial de Futures] podrás encontrar información acerca de cómo
+En el [tutorial sobre Futures] podrás encontrar información acerca de cómo
 usar esta API de Dart.
 
 ## Introducción

@@ -1,5 +1,6 @@
-import 'dart:io';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
 
 void main(List<String> arguments) {
     if (arguments.length != 1) {
@@ -9,4 +10,30 @@ void main(List<String> arguments) {
 
     String filePath = arguments[0];
     print('You are gonna read the file ${filePath}');
+    readFile(filePath);
 }
+
+void readFile(String filePath) {
+    File file = new File(filePath);
+
+    file.exists()
+    .then((fileExists) {
+        if (!fileExists) {
+            return new Future.error('File ${filePath} does not exists');
+        }
+
+        return new Future.value(filePath);
+    })
+    .then((filePath) => FileSystemEntity.isDirectory(filePath))
+    .then((pathIsDirectory) {
+        if (pathIsDirectory) {
+            return new Future.error('File ${filePath} is a directory');
+        }
+
+        return new Future.value(filePath);
+    })
+    .then((filePath) {
+        print('Finally, reading file ${filePath}');
+    });
+}
+
