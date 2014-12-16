@@ -33,10 +33,10 @@ void readFile(String filePath) {
     })
     .then((filePath) {
         print('Finally, reading file ${filePath}');
-        file.openRead()
-            .transform(UTF8.decoder)
-            .transform(new LineSplitter())
-            .listen((line) {
+        file.openRead()                     // returns a Stream to listen to
+            .transform(UTF8.decoder)        // transforms int's to characters
+            .transform(new LineSplitter())  // split in lines
+            .listen((line) {                // listen each line
                 print(line);
             });
     });
