@@ -23,15 +23,15 @@ void readFile(String filePath) {
 
         return new Future.value(filePath);
     })
-    .then((filePath) => FileSystemEntity.isDirectory(filePath))
+    .then((_) => FileSystemEntity.isDirectory(filePath))
     .then((pathIsDirectory) {
         if (pathIsDirectory) {
             return new Future.error('File ${filePath} is a directory');
         }
 
-        return new Future.value(filePath);
+        return new Future.value();
     })
-    .then((filePath) {
+    .then((_) {
         print('Finally, reading file ${filePath}');
         file.openRead()                     // returns a Stream to listen to
             .transform(UTF8.decoder)        // transforms int's to characters
