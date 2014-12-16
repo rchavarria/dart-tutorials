@@ -26,7 +26,7 @@ void readFile(String filePath) {
     .then((_) => FileSystemEntity.isDirectory(filePath))
     .then((pathIsDirectory) {
         if (pathIsDirectory) {
-            return new Future.error('File ${filePath} is a directory');
+            return new Future.error('${filePath} is a directory and can not be read');
         }
 
         return new Future.value();
