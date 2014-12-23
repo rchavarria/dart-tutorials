@@ -13,7 +13,7 @@ send out a repeating series of data
 - [Sortable lists](./sortable-list): create Web Components with Polymer and Dart to create and
 share libraries, components or functionalities
 - [Reading files](./reading-files): use streams to read files
-- [Navigating directories](https://github.com/dart-lang/sample-dgrep): a simple
+- [Navigating directories](./navigating-directories): a simple
 app that shows how to work with files and directoreis asynchronously
 - *in a near future*: [Search the web with HttpRequest and WebWorker](https://github.com/dart-lang/sample-dartiverse-search):
 client/server app to search on StackOverflow and Github
