@@ -39,6 +39,7 @@ void readFile(String filePath) {
                 .listen((line) {                // listen each line
                     print(line);
                 });
-        });
+        })
+	.catchError((error) => print('ERROR: ${error}'));
 }
 

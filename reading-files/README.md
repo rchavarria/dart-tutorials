@@ -110,7 +110,7 @@ TODOs:
 + crear estructura de ficheros para poder hacer varias pruebas
 + implementar el código
 + explicar mejor los tres casos de uso
-- manejar los errores en un catchError()
++ manejar los errores en un catchError()
 - 
 
 - [Dart]: http://dartlang.org
