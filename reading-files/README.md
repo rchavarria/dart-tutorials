@@ -92,10 +92,14 @@ FileSystemEntity.isDirectory(path).then((pathIsDirectory) {
 
 ## Ejecutar la aplicación
 
-`dart bin/read.dart bin` da un error al leer de un directorio
-`dart bin/read.dart foobar` da un error a intentar leer un dichero que no existe
-`dart bin/read.dart README.md` muestra este fichero por consola
+El caso más sencillo es cuando se proporciona una ruta a un fichero existente, por
+ejemplo con el comando `dart bin/read.dart README.md` veremos el contenido del
+fichero README del proyecto por consola.
 
+Para ver los mensajes de error, podemos probar pasando como parámetro un directorio,
+con `dart bin/read.dart bin` la aplicación mostrará un mensaje de error de que
+se ha intentado leer un directorio. Con `dart bin/read.dart foobar` la aplicación
+mostrará un mensaje de error de que no se encuentra el archivo `foobar`.
 
 TODOs:
 + investigar cómo crear un Future para poder encadenarlos.
@@ -105,8 +109,8 @@ TODOs:
     -> con el constructor Future.error() puedo resolver un Future con error
 + crear estructura de ficheros para poder hacer varias pruebas
 + implementar el código
++ explicar mejor los tres casos de uso
 - manejar los errores en un catchError()
-- explicar mejor los tres casos de uso
 - 
 
 - [Dart]: http://dartlang.org
