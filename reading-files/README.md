@@ -101,18 +101,6 @@ con `dart bin/read.dart bin` la aplicación mostrará un mensaje de error de que
 se ha intentado leer un directorio. Con `dart bin/read.dart foobar` la aplicación
 mostrará un mensaje de error de que no se encuentra el archivo `foobar`.
 
-TODOs:
-+ investigar cómo crear un Future para poder encadenarlos.
-    -> con el constructor Future.value() puedo devolver un Future que me dejará
-        encadenar llamadas
-+ investigar cómo provocar el fallo en un Future para saltar el flujo de ejecución
-    -> con el constructor Future.error() puedo resolver un Future con error
-+ crear estructura de ficheros para poder hacer varias pruebas
-+ implementar el código
-+ explicar mejor los tres casos de uso
-+ manejar los errores en un catchError()
-- 
-
 - [Dart]: http://dartlang.org
 - [Futures y llamadas asíncronas]: ../futures
 - [sample-cat]: https://github.com/dart-lang/sample-dcat/
