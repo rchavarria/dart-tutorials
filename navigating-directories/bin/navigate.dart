@@ -7,11 +7,11 @@ void main(List<String> arguments) {
     }
 
     String filePath = arguments[0];
-    readFile(filePath);
+    navigate(filePath);
 }
 
 void navigate(directoryPath) {
-    print('Navigating ${directoryPath}');
+    print('Navigating directory ${directoryPath}');
 }
 
 
