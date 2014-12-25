@@ -12,6 +12,10 @@ void main(List<String> arguments) {
 
 void navigate(directoryPath) {
     print('Navigating directory ${directoryPath}');
+    final directory = new Directory(directoryPath);
+    directory.list().listen( (file) {
+        print(file.path);
+    });
 }
 
 

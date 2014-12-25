@@ -13,6 +13,18 @@ El comando básico para ejecutar la aplicación es:
 
 Donde `directory path` es la ruta al directorio que queremos procesar.
 
+# Navegar un directorio
+
+En Dart es muy fácil recorrer un directorio mediante el uso del método `list`
+de la clase `Directory`.
+
+```
+final directory = new Directory(path);
+directory.list().listen( (file) {
+    print(file.path);
+});
+```
+
 
 
 TODOs:
