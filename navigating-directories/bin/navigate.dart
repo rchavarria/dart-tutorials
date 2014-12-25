@@ -28,17 +28,20 @@ void navigate(directoryPath, pattern) {
                 return;
             }
 
-            if (entity.path.contains(pattern)) {
-                print('File ${entity.path} contains the pattern');
-            } else {
-                searchContent(entity, pattern);
-            }
+            searchPatternInPath(file, pattern);
+            searchPatternInContent(file, pattern);
         });
     })
     .catchError(print);
 }
 
-void searchContent(file, pattern) {
+void searchPatternInPath(file, pattern) {
+    if (file.path.contains(pattern)) {
+        print('File ${entity.path} contains the pattern');
+    }
+}
+
+void searchPatternInContent(file, pattern) {
     file.readAsLines().then((lines) {
         lines.forEach((line) {
             if (line.contains(pattern)) {
