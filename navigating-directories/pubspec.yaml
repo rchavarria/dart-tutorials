@@ -1,0 +1,3 @@
+name: navigating_directories 
+description: An application to scan through directories searching for patterns
+dependencies:
