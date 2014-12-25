@@ -28,8 +28,8 @@ void navigate(directoryPath, pattern) {
                 return;
             }
 
-            searchPatternInPath(file, pattern);
-            searchPatternInContent(file, pattern);
+            searchPatternInPath(entity, pattern);
+            searchPatternInContent(entity, pattern);
         });
     })
     .catchError(print);
@@ -37,7 +37,7 @@ void navigate(directoryPath, pattern) {
 
 void searchPatternInPath(file, pattern) {
     if (file.path.contains(pattern)) {
-        print('File ${entity.path} contains the pattern');
+        print('File ${file.path} contains the pattern');
     }
 }
 
