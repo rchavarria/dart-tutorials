@@ -38,11 +38,27 @@ directory.list(recursive: true).listen(...);
 ...
 ```
 
+## Buscando el patrón
+
+Modificamos la aplicación para que necesite un parámetro adicional, el cual va
+a representar un patrón a buscar. De esta forma, la nueva forma de uso será:
+
+    dart bin/navigate.dart <directory path> <pattern>
+
+El método `list` lista las entidades del directorio (tantos directorios como
+ficheros). Si es un directorio, pasamos al siguiente. Si es un fichero primero
+buscamos el patrón en la ruta y si no lo encontramos, buscamos en el contenido
+del mismo. Para buscar en el contenido usamos un método de los aprendidos en el
+tutorial sobre [leer ficheros].
+
+
+
 
 
 TODOs:
-- 
+- Que se pueda buscar el patrón en el nombre del fichero, no en la ruta 
 
 
 
 [sample-dgrep]: https://github.com/dart-lang/sample-dgrep
+[leer ficheros]: ../reading-files
