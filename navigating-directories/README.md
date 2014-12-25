@@ -5,7 +5,7 @@ Esta aplicación está inspirada en el tutorial de ejemplo de la página de Dart
 forma recursiva en busca de patrones: o nombres de ficheros con un patrón
 dado o buscando un patrón en el contenido de los ficheros que vaya encontrando.
 
-# Uso básico
+## Uso básico
 
 El comando básico para ejecutar la aplicación es:
 
@@ -13,7 +13,7 @@ El comando básico para ejecutar la aplicación es:
 
 Donde `directory path` es la ruta al directorio que queremos procesar.
 
-# Navegar un directorio
+## Navegar un directorio
 
 En Dart es muy fácil recorrer un directorio mediante el uso del método `list`
 de la clase `Directory`.
@@ -23,6 +23,19 @@ final directory = new Directory(path);
 directory.list().listen( (file) {
     print(file.path);
 });
+```
+
+## Haciendolo recursivamente
+
+Esto no soluciona del todo el problema, debemos hacerlo recursivamente. En otros
+lenguajes esto es un poco complicado, ya que hay que utilizar recursividad o
+hacerlo mediante bucles. En Dart, es pasar un parámetro al método `list`.
+Increíble.
+
+```
+...
+directory.list(recursive: true).listen(...);
+...
 ```
 
 

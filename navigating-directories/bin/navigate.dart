@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:async';
 
 void main(List<String> arguments) {
     if (arguments.length != 1) {
@@ -12,10 +13,19 @@ void main(List<String> arguments) {
 
 void navigate(directoryPath) {
     print('Navigating directory ${directoryPath}');
-    final directory = new Directory(directoryPath);
-    directory.list().listen( (file) {
-        print(file.path);
-    });
+
+    FileSystemEntity.isDirectory(directoryPath)
+    .then((isDirectory) {
+        if (!isDirectory) {
+            return new Future.error('${directoryPath} is not a directory');
+        }
+
+        final directory = new Directory(directoryPath);
+        directory.list(recursive: true).listen( (file) {
+            print(file.path);
+        });
+    })
+    .catchError(print);
 }
 
 
