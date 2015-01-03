@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:async';
+import 'dart:convert';
 
 class WebSocketClient {
     TextInputElement intervalElement = querySelector('#interval');
@@ -27,6 +28,9 @@ class WebSocketClient {
         }
 
         setStatus('The server will answer every ${seconds} seconds');
+
+        var request = { 'interval': seconds.toString() };
+        webSocket.send(JSON.encode(request));
     }
 
     void connect() {

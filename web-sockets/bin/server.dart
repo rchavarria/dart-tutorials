@@ -9,7 +9,9 @@ void handleWebSocket(WebSocket webSocket) {
     webSocket
         .map((string) => JSON.decode(string))
         .listen((json) {
-            print('Message recieved in server');
+            String strInterval = json['interval'];
+            int interval = int.parse(strInterval);
+            print('Messages will be sent every ${interval} seconds');
         }, onError: (error) {
             print('Error in Web Socket');
             print(error);
@@ -34,6 +36,8 @@ void main() {
         // Disable jail root, as packages are local symlinks.
         virDir.jailRoot = false;
         virDir.allowDirectoryListing = false;
+
+        virDir.serve(router.defaultStream);
 
         // Add an error page handler.
         virDir.errorPageHandler = (HttpRequest request) {
