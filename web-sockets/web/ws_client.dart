@@ -63,7 +63,7 @@ class WebSocketClient {
 
     void onDisconnected(String msg) {
         setStatus('Disconnected because of ${msg}');
-        searchElement.disabled = true;
+        intervalElement.disabled = true;
     }
 
     void setStatus(String status) {
