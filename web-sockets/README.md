@@ -45,7 +45,7 @@ TODOS
 + cliente: crear un web socket
 + cliente: connectar con el servidor
 + servidor: crear un web server que sirva los ficheros
-- cliente: enviar el parámetro del intervalo
++ cliente: enviar el parámetro del intervalo
 - servidor: responder frente a web sockets
 - cliente: manejar los mensajes enviados por el servidor
 
