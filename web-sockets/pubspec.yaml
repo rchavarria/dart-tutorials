@@ -1,0 +1,8 @@
+name: dart_web_sockets
+description: A simple app to demonstrate the use of Web Sockets in the Dart
+    programming language
+dependencies:
+    browser: any
+environment:
+    sdk: ">=1.7.2 <2.0.0"
+
