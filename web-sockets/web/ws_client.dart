@@ -1,33 +1,75 @@
 import 'dart:html';
+import 'dart:async';
 
 class WebSocketClient {
     TextInputElement intervalElement = querySelector('#interval');
     DivElement statusElement = querySelector('#status');
     DivElement messagesElement = querySelector('#messages');
+    WebSocket webSocket;
 
     WebSocketClient() {
-        intervalElement.value = 'foo bar';
-        statusElement.innerHtml = 'Esto es el status element';
-        messagesElement.innerHtml = 'Y esto el messages element';
-
+        // listen change events on input text interval
         intervalElement.onChange.listen((e) {
             int seconds = int.parse(intervalElement.value,
-                                    onError: (_) => print('Error parsing ${intervalElement.value}'));
+                                    onError: (_) => setStatus('Error parsing ${intervalElement.value}'));
             getMessagesEvery(seconds);
             intervalElement.value = '';
         });
+
+        // connect to the web socket
+        connect();
     }
 
     void getMessagesEvery(int seconds) {
         if (seconds == null) {
-            print('No request will be sent');
+            setStatus('No request will be sent');
             return;
         }
 
-        print('The server will answer every ${seconds} seconds');
+        setStatus('The server will answer every ${seconds} seconds');
+    }
+
+    void connect() {
+        // a web socket connection uses the `ws://` protocol
+        // to the same host and port as the index.html file is served
+        // to the URL intervalMessages
+        webSocket = new WebSocket('ws://${Uri.base.host}:${Uri.base.port}/intervalMessages');
+
+        webSocket.onOpen.first.then((_) {
+            // send an event the web socket is connected when the channel is opened
+            onConnected();
+            webSocket.onClose.first.then((_) {
+                onDisconnected("Connection to ${webSocket.url} closed");
+            });
+        });
+        webSocket.onError.first.then((_) {
+            onDisconnected("Failed to connect to ${webSocket.url}");
+        });
+    }
+
+    void onConnected() {
+        setStatus('');
+        intervalElement.disabled = false;
+        intervalElement.focus();
+
+        webSocket.onMessage.listen((e) {
+            handleMessage(e.data);
+        });
+    }
+
+    void handleMessage(jsonFormattedData) {
+        setStatus('Data received');
+    }
+
+    void onDisconnected(String msg) {
+        setStatus('Disconnected because of ${msg}');
+        searchElement.disabled = true;
+    }
+
+    void setStatus(String status) {
+        statusElement.innerHtml = status;
     }
 }
-
 
 void main() {
     var client = new WebSocketClient();
