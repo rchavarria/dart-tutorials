@@ -1,6 +1,5 @@
 # Usando Web Sockets en Dart
 
-/!\ párrafo explicando un poco la historia de porqué conviene usar Web Sockets /!\
 En este tutorial veremos cómo usar [Web Sockets] en una aplicación web escrita
 en Dart. Actualmente, las aplicaciones web están siendo más y más complejas. Y
 no solamente eso, sino que en muchas ocasiones se necesita la misma aplicación

@@ -1,0 +1,24 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Dart y Web Sockets</title>
+</head>
+<body>
+    <header>
+        <h1>Dart y Web Sockets</h1>
+        <input type="text" placeholder="Intervalo" value="" id="interval" disabled />
+        <div id="status"></div>
+    </header>
+
+    <div id="messages"></div>
+
+    <footer>
+        Introduce un intervalo, envíalo al servidor y recibirás 10 mensajes
+        separados por tantos segundos como indique el intervalo.
+    </footer>
+
+    <script type="application/dart" src="ws_client.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+</body>
+</html>
