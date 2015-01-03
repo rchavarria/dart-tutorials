@@ -15,7 +15,7 @@ share libraries, components or functionalities
 - [Reading files](./reading-files): use streams to read files
 - [Navigating directories](./navigating-directories): a simple
 app that shows how to work with files and directoreis asynchronously
-- *in a near future*: [Search the web with HttpRequest and WebWorker](https://github.com/dart-lang/sample-dartiverse-search):
+- [Search the web with HttpRequest and WebSockets](https://github.com/dart-lang/sample-dartiverse-search):
 client/server app to search on StackOverflow and Github
 - *in a far future*: [HTML5 persistence](https://www.dartlang.org/samples/#html5_persistence)
 - *in a far future*: [Touch events](https://www.dartlang.org/samples/#touch_events)
