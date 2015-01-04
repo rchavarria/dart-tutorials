@@ -63,6 +63,10 @@ class WebSocketClient {
 
     void handleMessage(jsonFormattedData) {
         setStatus('Data received');
+
+        var div = new DivElement();
+        div.innerHtml = jsonFormattedData;
+        messagesElement.children.add(div);
     }
 
     void onDisconnected(String msg) {
