@@ -13,10 +13,12 @@ void handleWebSocket(WebSocket webSocket) {
         .listen((json) {
             String strInterval = json['interval'];
             int interval = int.parse(strInterval);
+            Duration durationInterval = new Duration(seconds: interval);
             print('Messages will be sent every ${interval} seconds');
 
             TIMES.forEach((i) {
                 webSocket.add('Message ${i}');
+                sleep(durationInterval);
             });
         }, onError: (error) {
             print('Error in Web Socket');
