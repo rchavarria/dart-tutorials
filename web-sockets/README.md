@@ -20,12 +20,95 @@ Dart [Dartiverse search]. Nosotros implementaremos algo mucho más sencillo pero
 que nos servirá para ilustrar la funcionalidad de los Web Sockets. Crearemos una
 aplicación web donde el cliente indicará al servidor un intervalo de tiempo y
 el servidor enviará varias respuestas separadas entre sí dicho intervalo.
+El código lo puedes encontrar en mi repositorio de Github
+[Usando Web Sockets en Dart].
 
 ## Cliente
 
-1. Crear el web socket
+La aplicación es una aplicación web, por lo que la parte cliente de la misma está
+compuesta por una página HTML y un script Dart.
 
-2. connectar con el servidor
+La parte HTML es muy simple, lo más importante son dos elementos:
+
+1. Una caja de texto, donde el usuario introducirá el intervalo en segundos
+con los que el servidor mandará sus mensajes
+2. Un bloque `div` donde vamos a añadir cada uno de los mensajes que envíe el
+servidor
+
+El script es algo más complejo, pero no mucho, ¿eh?. Básicamente, consta de dos
+partes:
+
+**Responder cuando el usuario introduce un valor**
+
+Añadiremos un manejador de evento a la caja de texto, de forma que cada vez
+que el usuario cambie su valor, enviaremos este valor al servidor. Primero,
+obtenemos una referencia al elemento, añadimos el manejador de evento, y
+establecemos la lógica a realizar cada vez que se lanza el evento. Para enviar
+datos al servidor a través del Web Socket utilizaremos el método `send()`
+de un objeto `WebSocket`. Se ha decidido enviar los datos en formato JSON,
+ya que es un formato muy usado en aplicaciones web.
+
+```
+TextInputElement intervalElement = querySelector('#interval');
+
+// listen change events on input text interval
+intervalElement.onChange.listen((_) {
+    int seconds = int.parse(intervalElement.value);
+    if (seconds == null) return; // user didn't enter a number
+
+    var request = { 'interval': seconds.toString() };
+    // we're assuming web socket has been initialized before
+    webSocket.send(JSON.encode(request));
+});
+```
+
+**Conectar con el servidor mediante un Web Socket**
+
+La otra parte esencial del cliente es conectar con el servidor a través de un
+Web Socket. La conexión no puede ser más sencilla. Simplemente hay que crear
+un objeto de la clase `WebSocket` con una URL. El protocolo de dichar URL es
+*ws* en lugar de *http* e indicamos que queremos apuntar a `intervalMessages`.
+El servidor dedicará esa dirección a gestionar conexiones a través de Web
+Sockets.
+
+En nuestro caso, la URL de conexión tendrá esta forma:
+`ws://localhost:9223/intervalMessages`.
+
+```
+// create web socket through a URL
+webSocket = new WebSocket('ws://${Uri.base.host}:${Uri.base.port}/intervalMessages');
+
+// listen when the web socket is opened
+webSocket.onOpen.first.then((_) {
+    // once the web socket is opened, listen every message sent by the server
+    webSocket.onMessage.listen((e) {
+        handleMessage(e.data);
+    });
+
+    // notify when the web socket is closed properly
+    webSocket.onClose.first.then((_) {
+        onDisconnected("Connection to ${webSocket.url} closed");
+    });
+});
+
+// manage cocnnection errors
+webSocket.onError.first.then((_) {
+    onDisconnected("Failed to connect to ${webSocket.url}");
+});
+
+// how to handle every message received from server
+void handleMessage(data) {
+    // decode json data and select the message property
+    var jsonResponse = JSON.decode(data);
+    String msg = jsonResponse['message'];
+
+    // append a div element for every message got from server
+    var div = new DivElement();
+    div.innerHtml = msg;
+    // messagesElement is a div element where all messages are appended
+    messagesElement.children.add(div);
+}
+```
 
 ## Servidor
 
@@ -47,10 +130,10 @@ TODOS
 + servidor: responder frente a web sockets
 + cliente: manejar los mensajes enviados por el servidor
 + servidor: enviar un mensaje cada x segundos
-- comenzar a describir el cliente
-- comenzar a descirbir el servidor
++ comenzar a describir el cliente
+- comenzar a describir el servidor
 
 [Web Sockets]: https://en.wikipedia.org/wiki/WebSocket
 [Qué son los Web Sockets]: http://pusher.com/websockets
 [Dartiverse search]: https://github.com/dart-lang/sample-dartiverse-search
-
+[Usando Web Sockets en Dart]: https://github.com/rchavarria/dart-tutorials/tree/master/web-sockets
