@@ -18,7 +18,12 @@ app that shows how to work with files and directoreis asynchronously
 - [Search the web with HttpRequest and WebSockets](./web-sockets):
 app that shows how to work with Web Sockets to have a bidirectional communication
 through a permanent conexion with a server
-- *in a far future*: [HTML5 persistence](https://www.dartlang.org/samples/#html5_persistence)
+- [HTML5 persistence](https://www.dartlang.org/samples/#html5_persistence): maybe,
+the most interesting tutorial is the one about
+[IndexedBD](https://www.dartlang.org/docs/tutorials/indexeddb)
+because the one about
+[LocalStorage](https://github.com/dart-lang/dart-samples/tree/master/html5/web/localstorage/basics#localstorage-101)
+seems too basic.
 - *in a far future*: [Touch events](https://www.dartlang.org/samples/#touch_events)
 
 Other tutorials that shows how to work with Dart can be found here:
