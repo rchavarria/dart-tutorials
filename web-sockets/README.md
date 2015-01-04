@@ -40,15 +40,15 @@ el servidor enviará varias respuestas separadas entre sí dicho intervalo.
 - Tutorial oficial [Dartiverse search]
 
 TODOS
-- comenzar a describir el cliente
-- comenzar a descirbir el servidor
 + cliente: crear un web socket
 + cliente: connectar con el servidor
 + servidor: crear un web server que sirva los ficheros
 + cliente: enviar el parámetro del intervalo
-- servidor: responder frente a web sockets
-- cliente: manejar los mensajes enviados por el servidor
-- servidor: enviar un mensaje cada x segundos
++ servidor: responder frente a web sockets
++ cliente: manejar los mensajes enviados por el servidor
++ servidor: enviar un mensaje cada x segundos
+- comenzar a describir el cliente
+- comenzar a descirbir el servidor
 
 [Web Sockets]: https://en.wikipedia.org/wiki/WebSocket
 [Qué son los Web Sockets]: http://pusher.com/websockets

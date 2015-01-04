@@ -17,7 +17,8 @@ void handleWebSocket(WebSocket webSocket) {
             print('Messages will be sent every ${interval} seconds');
 
             TIMES.forEach((i) {
-                webSocket.add('Message ${i}');
+                var response = { 'message': 'Generando mensaje ${i}' };
+                webSocket.add(JSON.encode(response));
                 sleep(durationInterval);
             });
         }, onError: (error) {

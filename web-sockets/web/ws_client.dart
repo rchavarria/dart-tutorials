@@ -63,9 +63,11 @@ class WebSocketClient {
 
     void handleMessage(jsonFormattedData) {
         setStatus('Data received');
+        var jsonResponse = JSON.decode(jsonFormattedData);
+        String msg = jsonResponse['message'];
 
         var div = new DivElement();
-        div.innerHtml = jsonFormattedData;
+        div.innerHtml = msg;
         messagesElement.children.add(div);
     }
 
