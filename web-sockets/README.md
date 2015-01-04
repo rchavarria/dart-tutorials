@@ -48,6 +48,7 @@ TODOS
 + cliente: enviar el parámetro del intervalo
 - servidor: responder frente a web sockets
 - cliente: manejar los mensajes enviados por el servidor
+- servidor: enviar un mensaje cada x segundos
 
 [Web Sockets]: https://en.wikipedia.org/wiki/WebSocket
 [Qué son los Web Sockets]: http://pusher.com/websockets

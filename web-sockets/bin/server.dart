@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:http_server/http_server.dart' as http_server;
 import 'package:route/server.dart' show Router;
 
+List<int> TIMES = new List<int>.generate(10, (i) => i);
+
 void handleWebSocket(WebSocket webSocket) {
     webSocket
         .map((string) => JSON.decode(string))
@@ -12,6 +14,10 @@ void handleWebSocket(WebSocket webSocket) {
             String strInterval = json['interval'];
             int interval = int.parse(strInterval);
             print('Messages will be sent every ${interval} seconds');
+
+            TIMES.forEach((i) {
+                webSocket.add('Message ${i}');
+            });
         }, onError: (error) {
             print('Error in Web Socket');
             print(error);
