@@ -112,26 +112,101 @@ void handleMessage(data) {
 
 ## Servidor
 
-1. Crear server que sirva ficheros estáticos
+En el lado servidor podemos decir que hay tres actividades básicas:
 
-2. Responder frente a peticiones a un web socket
+**Servir ficheros estáticos**
+
+Arrancaremos nuestro servidor como una aplicación Dart de consola, la cual escuchará
+peticiones HTTP en un puerto de nuestra elección. 
+
+Esta parte de la aplicación se encargará de servir ficheros estáticos, básicamente
+los ficheros que forman parte de la parte cliente de este tutorial.
+
+Esto lo implementaremos fácilmente con el paquete
+[http_server](http://www.dartdocs.org/documentation/http_server/0.9.5+1/index.html#http_server)
+el cual proporciona una clase, `VirtualDirectory`, que hará este trabajo. El código
+quedaría más o menos así (ver el 
+[código final](https://github.com/rchavarria/dart-tutorials/tree/master/web-sockets)
+para comprobar como queda integrado con el resto de partes):
+
+```
+import 'package:http_server/http_server.dart' as http_server;
+//...
+var buildPath = Platform.script.resolve('../build/web').toFilePath();
+//...
+var virDir = new http_server.VirtualDirectory(buildPath);
+virDir.jailRoot = false;
+virDir.allowDirectoryListing = false;
+```
+
+**Crear conexiones a Web Sockets**
+
+Utilizaremos el paquete
+[route](http://www.dartdocs.org/documentation/route/0.4.6/index.html#route)
+para responder a conexiones que usen Web Sockets, a través de la clase `Router`
+que nos proporciona métodos apropiados para ello.
+
+`Router` puede servir una URL específica, transformar la petición a un objeto
+`WebSocket`, con lo que podemos enviar mensajes de vuelta al cliente a través
+de ese objeto.
+
+```
+import 'package:route/server.dart' show Router;
+//...
+var router = new Router(server);
+router.serve('/intervalMessages')
+    .transform(new WebSocketTransformer())
+    .listen(handleWebSocket);
+```
+
+**Responder a mensajes recibidos a través del Web Socket**
+
+Y por último, el objetivo de este tutorial, reponder a peticiones o a mensajes
+recibidos a través de un Web Socket.
+
+Por cada petición HTTP sobre la URL `/intervalMessages`, la clase `Router`
+crea un objeto `WebSocket` sobre el que podemos actuar. Lo que hacemos en 
+decodificar los mensajes recibidos (son mensajes en formato JSON) y 
+procesarlos.
+
+En cada uno de estos mensajes, viene un intervalo en segundos que debemos
+esperar entre mensaje y mensaje de respuesta. Lo que hacemos es enviar
+10 mensajes iterando en un bucle. Nada especial aquí, construimos un
+mensaje, lo codificamos en JSON y lo enviamos de vuelta al cliente mediante
+el método `add` de `WebSocket`.
+
+```
+// constant to loop
+List<int> TIMES = new List<int>.generate(10, (i) => i);
+
+void handleWebSocket(WebSocket webSocket) {
+    webSocket
+        .map((string) => JSON.decode(string))
+        .listen((json) {
+            // get interval from data sent by client
+            String strInterval = json['interval'];
+            int interval = int.parse(strInterval);
+            Duration durationInterval = new Duration(seconds: interval);
+
+            // loop 10 times
+            TIMES.forEach((i) {
+                var response = { 'message': 'Generando mensaje ${i}' };
+                webSocket.add(JSON.encode(response));
+                // rude way to separate messages, sorry 
+                sleep(durationInterval);
+            });
+        }, onError: (error) {
+            // error handling
+        });
+}
+```
 
 ## Recursos
 
+- [Usando Web Sockets en Dart]
 - [Web Sockets]
 - [Qué son los Web Sockets] 
 - Tutorial oficial [Dartiverse search]
-
-TODOS
-+ cliente: crear un web socket
-+ cliente: connectar con el servidor
-+ servidor: crear un web server que sirva los ficheros
-+ cliente: enviar el parámetro del intervalo
-+ servidor: responder frente a web sockets
-+ cliente: manejar los mensajes enviados por el servidor
-+ servidor: enviar un mensaje cada x segundos
-+ comenzar a describir el cliente
-- comenzar a describir el servidor
 
 [Web Sockets]: https://en.wikipedia.org/wiki/WebSocket
 [Qué son los Web Sockets]: http://pusher.com/websockets
