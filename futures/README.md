@@ -121,6 +121,25 @@ Future.wait([expensiveA(), expensiveB(), expensiveC()])
 Aquí, `wait()` devuelve un `Future` cuyo valor es una lista con los valores de todos los
 `Future`s pasados como parámetros.
 
+## Creando tus propios `Future`
+
+De acuerdo, entendido cómo se usan. Pero, ¿y si lo que quiero es ser yo quien comienza la
+cadena de `Future`s? ¿Cómo se crea el primero de ellos?
+
+```
+Future methodReturningAFuture() {
+    return new Future.value('foo bar');
+}
+```
+
+El método del código anterior devuelve un valor, un `Future` que se resuelve al valor
+`foo bar`. Si quisiéramos imprimir esa cadena por consola, haríamos lo siguiente:
+
+```
+methodReturningAFuture()
+    .then((message) => print(message));
+```
+
 ## Conclusión
 
 Si así *en papel* no te ha quedado lo suficientemente claro, te recomiendo que te pases
